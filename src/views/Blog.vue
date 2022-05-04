@@ -1,19 +1,36 @@
 <template>
+  <div class="rounded-md max-h-96">
+    <div class="relative">
+      <input
+        v-model="search"
+        type="text"
+        class="
+          w-full
+          py-3
+          pl-10
+          pr-4
+          text-emerald-500
+          border
+          rounded-md
+          bg-gray-800
+          text-emerald-300
+          dark:border-emerald-600
+          focus:border-emerald-500
+          dark:focus:border-emerald-500
+          focus:outline-none focus:ring
+        "
+        placeholder="Search . . ."
+      />
+    </div>
 
+    <hr class="mt-4 bg-emerald-300" />
 
- 
-       
-            
-
-
-  <div class="rounded-md max-h-96  " >
     <div
       class="
         max-w-2xl
-        mt-4
+        mt-6
         mx-auto
         overflow-hidden
-        
         rounded-lg
         shadow-md
         bg-gray-700
@@ -51,65 +68,52 @@
               duration-200
               transform
               dark:text-white
-              hover:text-gray-600 hover:underline
             "
             >{{ course.title }}</RouterLink
           >
         </div>
- 
-        
 
         <div class="mt-4">
           <div class="flex justify-end mt-4">
-            
- <RouterLink
-            :to="{ name: 'edit', params: { id: course.id } }"
-             
-            >     
-            
-            
-             <button
-              class="
-                flex
-                items-center
-                px-2
-                py-2
-                font-medium
-                tracking-wide
-                text-white
-                capitalize
-                transition-colors
-                duration-200
-                transform
-                bg-emerald-600
-                rounded-md
-                hover:bg-emerald-500
-                focus:outline-none
-                focus:ring
-                focus:ring-emerald-300
-                focus:ring-opacity-80
-              "
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
+            <RouterLink :to="{ name: 'edit', params: { id: course.id } }">
+              <button
+                class="
+                  flex
+                  items-center
+                  px-2
+                  py-2
+                  font-medium
+                  tracking-wide
+                  text-white
+                  capitalize
+                  transition-colors
+                  duration-200
+                  transform
+                  bg-emerald-600
+                  rounded-md
+                  hover:bg-emerald-500
+                  focus:outline-none
+                  focus:ring
+                  focus:ring-emerald-300
+                  focus:ring-opacity-80
+                "
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                />
-              </svg>
-            </button>
-            
-            
-            </RouterLink
-          >
-            
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                  />
+                </svg>
+              </button>
+            </RouterLink>
 
             <button
               @click="deleteCourse(course.id)"
@@ -153,16 +157,14 @@
         </div>
       </div>
     </div>
-    
-    
   </div>
-  
 </template>
 
 <script>
 export default {
   data() {
     return {
+      search: [],
       courseList: [],
     };
   },
@@ -173,12 +175,9 @@ export default {
 
   methods: {
     getCourseList() {
-      this.axios
-        .get(
-          "https://cursos-prueba.tk/api/courses" +
-            "?included=category && " +
-            "?included=user"
-        )
+      this.axios  //
+        .get(  
+          "https://cursos-prueba.tk/api/courses" +"?included=category" + "&filter[title]=" + this.search)
         .then((response) => {
           this.courseList = response.data;
         })
@@ -190,8 +189,15 @@ export default {
     async deleteCourse(id) {
       await this.axios.delete("https://cursos-prueba.tk/api/courses/" + id);
       this.getCourseList();
-      
     },
+  },
+
+  //vigilante
+  watch: {
+    search() {
+      this.getCourseList();
+    },
+    paginate() {},
   },
 };
 </script>

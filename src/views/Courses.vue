@@ -6,7 +6,7 @@
         <div class="p-6">
             <div>
                 <span class="text-xs font-medium text-emerald-600 uppercase text-emerald-400">{{course.category.name}}</span>
-                <a href="#" class="block mt-2 text-2xl font-semibold text-emerald-400 transition-colors duration-200 transform dark:text-white hover:text-gray-600 hover:underline">{{course.title}}</a>
+                <p href="#" class="block mt-2 text-2xl font-semibold text-emerald-400 transition-colors duration-200 transform dark:text-white   ">{{course.title}}</p>
                 <p class="mt-2 text-sm text-emerald-600 dark:text-emerald-400">{{course.description}}.</p>
             </div>
 
@@ -14,7 +14,7 @@
                 <div class="flex items-center">
                     <div class="flex items-center">
                         <img class="object-cover h-10 rounded-full" src="https://images.unsplash.com/photo-1586287011575-a23134f797f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=48&q=60" alt="Avatar">
-                        <a href="#" class="mx-2 font-semibold text-gray-700 dark:text-gray-200">Jone Doe</a>
+                        <p  class="mx-2 font-semibold text-gray-700 dark:text-gray-200">Jone Doe</p>
                     </div>
                     <span class="mx-1 text-xs text-gray-600 text-gray-300">21 SEP 2015</span>
                 </div>
