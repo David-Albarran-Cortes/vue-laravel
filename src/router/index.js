@@ -4,6 +4,8 @@ import Blog from '../views/Blog.vue'
 import Courses from '../views/Courses.vue'
 import Create from '../views/Create.vue'
 import Edit from '../views/Edit.vue'
+import Login from '../views/login/Login.vue'
+import Register from '../views/login/Register.vue'
 
 
 
@@ -55,6 +57,21 @@ const router = createRouter({
             path: '/edit/:id',
             name: 'edit',
             component: Edit
+        },
+
+
+        //Login
+        {
+            path: '/login',
+            name: 'login',
+            component: Login
+        },
+
+        //register
+        {
+            path: '/register',
+            name: 'register',
+            component: Register
         },
 
     ]
