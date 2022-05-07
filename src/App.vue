@@ -31,9 +31,13 @@ import HelloWorld from "@/components/HelloWorld.vue";
             <div :class="open ? 'block': 'hidden'" class="w-full md:flex md:items-center md:justify-between">
                 <div class="flex flex-col px-2 py-3 -mx-4 md:flex-row md:mx-0 md:py-0">
 
-                     <RouterLink to="/blog" class="px-2 py-1 text-sm font-medium text-gray-200 transition-colors duration-200 transform rounded dark:text-emerald-200 hover:bg-emerald-700 hover:text-emerald-100 md:mx-2   ">Blog</RouterLink>
+                  <div  class="flex flex-col px-2 py-3 -mx-4 md:flex-row md:mx-0 md:py-0">
+                      <RouterLink to="/blog" class="px-2 py-1 text-sm font-medium text-gray-200 transition-colors duration-200 transform rounded dark:text-emerald-200 hover:bg-emerald-700 hover:text-emerald-100 md:mx-2   ">Blog</RouterLink>
+
+                  </div>
+
                      
-                      <div v-if="auth" class="flex flex-col px-2 py-3 -mx-4 md:flex-row md:mx-0 md:py-0">
+                      <div v-if="auth" class="flex flex-col px-2  -mx-4 md:flex-row md:mx-0 md:py-0">
                           <RouterLink to="/create"    class="px-2 py-1 text-sm font-medium text-gray-200 transition-colors duration-200 transform rounded dark:text-emerald-200 hover:bg-emerald-700 hover:text-emerald-100 md:mx-2 ">Create</RouterLink>
                           <RouterLink to="/dashboard" class="px-2 py-1 text-sm font-medium text-gray-200 transition-colors duration-200 transform rounded dark:text-emerald-200 hover:bg-emerald-700 hover:text-emerald-100 md:mx-2 ">Dashboard</RouterLink>
                        </div> 
