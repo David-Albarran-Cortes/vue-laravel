@@ -1,4 +1,6 @@
 <template>
+
+ 
   <div class="rounded-md max-h-96">
     <div class="relative">
       <input
@@ -161,6 +163,7 @@
 </template>
 
 <script>
+ 
 export default {
   data() {
     return {
@@ -177,7 +180,7 @@ export default {
     getCourseList() {
       this.axios  //
         .get(  
-          "https://cursos-prueba.tk/api/courses" +"?included=category" + "&filter[title]=" + this.search)
+          "/api/courses" +"?included=category" + "&filter[title]=" + this.search)
         .then((response) => {
           this.courseList = response.data;
         })
@@ -187,7 +190,7 @@ export default {
     },
 
     async deleteCourse(id) {
-      await this.axios.delete("https://cursos-prueba.tk/api/courses/" + id);
+      await this.axios.delete("/api/courses/" + id);
       this.getCourseList();
     },
   },

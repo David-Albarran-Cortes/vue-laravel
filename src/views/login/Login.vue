@@ -1,22 +1,16 @@
 <template>
   <section class="max-w-4xl p-6 mx-auto rounded-md shadow-md bg-gray-700">
     <h2 class="text-lg font-semibold text-gray-200 capitalize text-white">
-     Login
+      Login
     </h2>
-    
 
-     
- 
     <form @submit.prevent="Login()">
-     
       <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
         <div>
-          <label class="text-gray-200 dark:text-gray-200">email</label>
+          <label class="text-gray-200 dark:text-gray-200">email   </label>
           <input
-            
             type="email"
             v-model="email"
-
             class="
               block
               w-full
@@ -33,18 +27,13 @@
               focus:outline-none focus:ring
             "
           />
-          
-    
-           
         </div>
 
         <div>
           <label class="text-gray-200 dark:text-gray-200">password</label>
           <input
-           
             type="password"
             v-model="password"
-            
             class="
               block
               w-full
@@ -62,9 +51,9 @@
             "
           />
         </div>
-
-         
       </div>
+
+        <p class="text-white">{{auth}}</p>
 
       <div class="flex justify-end mt-6">
         <button
@@ -81,49 +70,61 @@
             rounded-md
             hover:bg-emerald-600
             focus:outline-none focus:bg-emerald-600
+            disabled
           "
         >
           Login
         </button>
-      </div>
-      
-     
-        
-       
-   
 
+        
+      </div>
     </form>
   </section>
-  
+ 
 </template>
 
 <script>
+import { mapMutations, mapState } from "vuex";
 export default {
-   data(){
+  data() {
+    return {
+      email: "",
+      password: "", 
+      errors : [],
+    };
+  },
+  computed: {
+    ...mapState(["auth"]),
+  },
+  methods: {
+    ...mapMutations(["setAuth"]),
 
-     return{
-        email: "",
-        password: "",
+    Login() {
+      this.axios
+        .post("/api/login", {
+          gran_type: "password",
+          client_id: "95e1d3ff-7270-4e6c-8e9c-6dcd6bc10df2",
+          client_secret: "O3tH7XtTgQTD06hMZV2NgfiRk94IsaUGFBTKYKdP",
+          username: this.email,
+          password: this.password,
+        })
+        .then((response) => {
+          console.log(response.data.user);
+          this.setAuth(response.data);
+          localStorage.setItem('auth', JSON.stringify(response.data))
+          
+          this.$router.push({ path: "dashboard" });
+          
+        })
+        .catch((error) => {
+          console.log(error.response.data);
 
-     }
-       
-      
-   },
-methods:{
-  Login() {
-
-    
-    alert('Login')
-  }
-}
-}
-
-
-
-
-
+           
+        });
+    },
+  },
+};
 </script>
 
 <style>
-
 </style>

@@ -5,18 +5,22 @@ import HelloWorld from "@/components/HelloWorld.vue";
 
 <template>
   <header class="">
-   
-
     <div class="wrapper">
       <HelloWorld msg="Blog" />
 
       <nav>
-         
-     
         <RouterLink to="/blog">Blog</RouterLink>
-         <RouterLink to="/create">Create</RouterLink>
-           <RouterLink to="/login">Login</RouterLink>
-             <RouterLink to="/register">Register</RouterLink>
+        <RouterLink to="/create">Create</RouterLink>
+        <div v-if="auth">
+             <RouterLink to="/register">Cerrar session</RouterLink>
+        </div>
+
+        <div v-else="auth">
+ <RouterLink to="/login">Login</RouterLink>
+        <RouterLink to="/register">Register</RouterLink>
+        </div>
+       
+        <RouterLink to="/dashboard">Dashboard</RouterLink>
       </nav>
     </div>
   </header>
@@ -24,6 +28,26 @@ import HelloWorld from "@/components/HelloWorld.vue";
   <RouterView />
 </template>
 
+
+<script>
+import { mapActions, mapState } from "vuex";
+
+export default {
+  created() {
+    this.setAuth();
+  },
+
+  methods: {
+    ...mapActions(["setAuth"]),
+  },
+
+  computed: {
+      ...mapState(["auth"]),
+  }
+
+
+};
+</script>
 <style>
 @import "@/assets/base.css";
 

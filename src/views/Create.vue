@@ -4,17 +4,13 @@
       Create Blog
     </h2>
 
-     
- 
     <form @submit.prevent="saveCourse()">
-     
       <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
         <div>
           <label class="text-gray-200 dark:text-gray-200">Title</label>
           <input
             v-model="course.title"
             type="text"
-            
             class="
               block
               w-full
@@ -31,9 +27,6 @@
               focus:outline-none focus:ring
             "
           />
-          
-    
-           
         </div>
 
         <div>
@@ -41,7 +34,6 @@
           <input
             v-model="course.description"
             type="text"
-            
             class="
               block
               w-full
@@ -62,11 +54,10 @@
 
         <div class="col-span-6 sm:col-span-3">
           <label class="block text-sm font-medium text-gray-200"
-            >Category  
+            >Category
           </label>
           <select
             name=""
-            
             v-model="course.category_id"
             id="category"
             autocomplete="country-name"
@@ -117,20 +108,18 @@
           Save
         </button>
       </div>
-      
-     
-       <ul v-for="error in errors" :key="error" class="font-semibold text-red-500 dark:text-red-400  bg-gray-700">
-         
-         {{error }}
-         
-         
-         </ul>
-       
-   
 
+      <ul
+        v-for="error in errors"
+        :key="error"
+        class="font-semibold text-red-600 dark:text-red-400 bg-gray-700"
+      >
+        {{
+          error
+        }}
+      </ul>
     </form>
   </section>
-  
 </template>
 
 <script>
@@ -150,51 +139,38 @@ export default {
 
   created() {
     this.getCategories();
- 
   },
 
   methods: {
     getCategories() {
       this.axios
-        .get("https://cursos-prueba.tk/api/categories")
+        .get("/api/categories")
         .then((response) => {
           this.categoryList = response.data;
-
-          
         })
         .catch((error) => {
           console.log(error);
         });
     },
 
-  async  saveCourse() {
-    await  this.axios
-        .post("https://cursos-prueba.tk/api/courses/",this.course)
-        .then(response => {
-
-              let course = response.data;
-              this.courses.push(course);
-
-             
- 
+    async saveCourse() {
+      await this.axios
+        .post("/api/courses/", this.course)
+        .then((response) => {
+          let course = response.data;
+          this.courses.push(course);
           //this.course.push(response.data);
-         this.course = {
-           title: '',
-           description: '',
-           category_id: ''
-         }
-
-         
+          this.course = {
+            title: "",
+            description: "",
+            category_id: "",
+          };
         })
-        .catch(error => {
-         
-        //console.log(error.response.data.errors);
-        let errors = Object.values(error.response.data.errors).flat();
+        .catch((error) => {
+          //console.log(error.response.data.errors);
+          let errors = Object.values(error.response.data.errors).flat();
           this.errors = errors;
-
-          
-
-         });
+        });
     },
   },
 };

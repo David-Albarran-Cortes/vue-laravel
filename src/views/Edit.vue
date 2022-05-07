@@ -139,7 +139,7 @@ export default {
 
   methods: {
      getCourse() {
-      this.axios.get('https://cursos-prueba.tk/api/courses/' + this.$route.params.id  + '?included=category')
+      this.axios.get('/api/courses/' + this.$route.params.id  + '?included=category')
         .then(response => {
           this.course = response.data;
 
@@ -153,7 +153,7 @@ export default {
 
      getCategories() {
       this.axios
-        .get("https://cursos-prueba.tk/api/categories"  )
+        .get("/api/categories"  )
         .then((response) => {
           this.categoryList = response.data;
         })
@@ -165,7 +165,7 @@ export default {
 
     editCourse() {
          this.axios
-        .put("https://cursos-prueba.tk/api/courses/" + this.$route.params.id, this.course)
+        .put("/api/courses/" + this.$route.params.id, this.course)
         .then( () => {
 
               this.$router.push({ path: '/blog' })
