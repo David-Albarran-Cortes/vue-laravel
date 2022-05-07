@@ -17,5 +17,11 @@ export const store = createStore({
                 commit("setAuth", JSON.parse(localStorage.getItem("auth")));
             }
         },
+
+        logout() {
+            localStorage.removeItem("auth");
+            location.reload();
+        }
+
     },
 });

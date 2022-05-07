@@ -85,5 +85,17 @@ const router = createRouter({
     ],
 });
 
+router.beforeEach((to, from, next) => {
+    const protectedRoute = to.matched.some(record => record.meta.requiresAuth)
+
+    if (protectedRoute && !localStorage.getItem("auth")) {
+        next('/login');
+    } else {
+        next();
+    }
+
+})
+
+
 
 export default router;

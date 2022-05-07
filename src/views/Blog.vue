@@ -75,7 +75,7 @@
           >
         </div>
 
-        <div class="mt-4">
+        <div class="mt-4"  v-if="auth">
           <div class="flex justify-end mt-4">
             <RouterLink :to="{ name: 'edit', params: { id: course.id } }">
               <button
@@ -157,13 +157,15 @@
             </button>
           </div>
         </div>
+
       </div>
     </div>
   </div>
 </template>
 
 <script>
- 
+ import { mapActions, mapState } from "vuex";
+
 export default {
   data() {
     return {
@@ -174,6 +176,9 @@ export default {
 
   created() {
     this.getCourseList();
+  },
+   computed: {
+    ...mapState(["auth"]),
   },
 
   methods: {

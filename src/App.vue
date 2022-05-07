@@ -12,14 +12,15 @@ import HelloWorld from "@/components/HelloWorld.vue";
         <RouterLink to="/blog">Blog</RouterLink>
         <RouterLink to="/create">Create</RouterLink>
         <div v-if="auth">
-             <RouterLink to="/register">Cerrar session</RouterLink>
+          <RouterLink @click="logout" to="/register">Cerrar session</RouterLink>
+          
         </div>
 
         <div v-else="auth">
- <RouterLink to="/login">Login</RouterLink>
-        <RouterLink to="/register">Register</RouterLink>
+          <RouterLink to="/login">Login</RouterLink>
+          <RouterLink to="/register">Register</RouterLink>
         </div>
-       
+
         <RouterLink to="/dashboard">Dashboard</RouterLink>
       </nav>
     </div>
@@ -38,14 +39,12 @@ export default {
   },
 
   methods: {
-    ...mapActions(["setAuth"]),
+    ...mapActions(["setAuth" , "logout"]),
   },
 
   computed: {
-      ...mapState(["auth"]),
-  }
-
-
+    ...mapState(["auth"]),
+  },
 };
 </script>
 <style>

@@ -4,7 +4,7 @@
         
         <div class="flex items-center justify-between">
             <h1 class="text-2xl font-bold text-gray-100 dark:text-white    ">Welcome {{auth.user.name}} </h1>
-            <a class="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-200 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500">Cerrar seccion</a>
+            <a @click="logout" class="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-200 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500">Cerrar seccion</a>
         </div>
 
         <div class="mt-2">
@@ -24,9 +24,13 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
+
+    methods: {
+    ...mapActions(["logout"]),
+  },
 
 computed: {
     ...mapState(["auth"]),
