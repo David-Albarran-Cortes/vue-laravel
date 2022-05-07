@@ -5,8 +5,11 @@
     </h2>
 
     <form @submit.prevent="saveCourse()">
-      <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-        <div>
+      <div class="px-4 py-5   sm:p-6"> 
+        
+        
+      <div class="grid grid-cols-6 gap-6">
+        <div class="col-span-6 sm:col-span-3">
           <label class="text-gray-200 dark:text-gray-200">Title</label>
           <input
             v-model="course.title"
@@ -29,7 +32,7 @@
           />
         </div>
 
-        <div>
+        <div class="col-span-6 sm:col-span-3">
           <label class="text-gray-200 dark:text-gray-200">Description </label>
           <input
             v-model="course.description"
@@ -52,7 +55,7 @@
           />
         </div>
 
-        <div class="col-span-6 sm:col-span-3">
+        <div class="col-span-6 sm:col-span-6">
           <label class="block text-sm font-medium text-gray-200"
             >Category
           </label>
@@ -118,8 +121,14 @@
           error
         }}
       </ul>
+
+      
+       
+      </div>
     </form>
   </section>
+
+  
 </template>
 
 <script>
