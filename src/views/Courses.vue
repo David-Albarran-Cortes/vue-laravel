@@ -13,10 +13,10 @@
             <div class="mt-4">
                 <div class="flex items-center">
                     <div class="flex items-center">
-                        <img class="object-cover h-10 rounded-full" src="https://images.unsplash.com/photo-1586287011575-a23134f797f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=48&q=60" alt="Avatar">
-                        <p  class="mx-2 font-semibold text-gray-700 dark:text-gray-200">Jone Doe</p>
+                        <img class="object-cover h-10 rounded-full" :src="user.profile_photo_url" alt="Avatar">
+                        <p  class="mx-2 font-semibold text-gray-300 dark:text-gray-200">{{user.name}}</p>
                     </div>
-                    <span class="mx-1 text-xs text-gray-600 text-gray-300">21 SEP 2015</span>
+                    <span class="mx-1 text-xs text-gray-300 text-gray-300">21 SEP 2015</span>
                 </div>
             </div>
         </div>
@@ -30,6 +30,7 @@ export default {
     return {
       course: {},
       category:{},
+      user:{}
     };
   },
 
@@ -39,10 +40,11 @@ export default {
 
   methods: {
     getCourse() {
-      this.axios.get('/api/courses/' + this.$route.params.id + '?included=category')
+      this.axios.get('/courses/' + this.$route.params.id + '?included=category,user')
         .then(response => {
           this.course = response.data;
            this.category = response.data.category;
+           this.user = response.data.user;
 
            //{{course.category.name}}
 

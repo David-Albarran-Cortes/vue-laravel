@@ -32,7 +32,7 @@ import HelloWorld from "@/components/HelloWorld.vue";
                 <div class="flex flex-col px-2 py-3 -mx-4 md:flex-row md:mx-0 md:py-0">
 
                   <div  class="flex flex-col px-2 py-3 -mx-4 md:flex-row md:mx-0 md:py-0">
-                      <RouterLink to="/blog" class="px-2 py-1 text-sm font-medium text-gray-200 transition-colors duration-200 transform rounded dark:text-emerald-200 hover:bg-emerald-700 hover:text-emerald-100 md:mx-2   ">Blog</RouterLink>
+                      <RouterLink name="/blog" to="/blog" class="px-2 py-1 text-sm font-medium text-gray-200 transition-colors duration-200 transform rounded dark:text-emerald-200 hover:bg-emerald-700 hover:text-emerald-100 md:mx-2   ">Blog</RouterLink>
 
                   </div>
 
@@ -90,6 +90,7 @@ import HelloWorld from "@/components/HelloWorld.vue";
 <script>
 import { mapActions, mapState } from "vuex";
 
+
 export default {
 
 
@@ -116,6 +117,17 @@ export default {
   computed: {
     ...mapState(["auth"]),
   },
+    
+    watch:{
+      auth(newValue){
+        if (newValue) {
+          this.axios.defaults.headers.common['Authorization'] = 'Bearer ' + newValue.token.access_token;
+        }
+
+      } 
+    }
+
+
 };
 </script>
 

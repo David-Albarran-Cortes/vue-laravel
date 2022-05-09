@@ -9,8 +9,9 @@ import VueAxios from 'vue-axios'
 import VueSweetalert2 from 'vue-sweetalert2';
 
 //url_base
-axios.defaults.baseURL = "https://cursos-prueba.tk"
+axios.defaults.baseURL = "https://cursos-prueba.tk/api/v2"
 
+axios.defaults.withCredentials = true;
 
 const app = createApp(App)
 app.use(VueSweetalert2);

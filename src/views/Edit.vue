@@ -143,7 +143,7 @@ export default {
 
   methods: {
      getCourse() {
-      this.axios.get('/api/courses/' + this.$route.params.id  + '?included=category')
+      this.axios.get('/courses/' + this.$route.params.id  + '?included=category')
         .then(response => {
           this.course = response.data;
 
@@ -157,7 +157,7 @@ export default {
 
      getCategories() {
       this.axios
-        .get("/api/categories"  )
+        .get("/categories"  )
         .then((response) => {
           this.categoryList = response.data;
         })
@@ -169,7 +169,7 @@ export default {
 
     editCourse() {
          this.axios
-        .put("/api/courses/" + this.$route.params.id, this.course)
+        .put("/courses/" + this.$route.params.id, this.course)
         .then( () => {
 
               this.$router.push({ path: '/blog' })
