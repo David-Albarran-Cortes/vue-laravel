@@ -26,12 +26,12 @@
       <div class="grid grid-cols-1 mt-8 gap-8 md:grid-cols-2 lg:grid-cols-3">
         <div
           class="bg-gray-700 rounded-md"
-          v-for="course in courseList"
+          v-for="course in courseList.data"
           :key="course.id"
         >
           <img
             class="object-cover w-full h-64 rounded-md"
-            src="https://images.unsplash.com/photo-1550439062-609e1531270e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            src="https://source.unsplash.com/300x300/?3d-renders?2"
             alt="Article"
           />
 
@@ -45,7 +45,7 @@
                   uppercase
                   dark:text-blue-400
                 "
-                >{{ course.category.name }}</span
+                >        {{ course.category.name }}  </span
               >
               <RouterLink
                 :to="{ name: 'courses', params: { id: course.id } }"
@@ -166,6 +166,52 @@
       </div>
     </div>
   </section>
+
+
+        
+        <!-- This example requires Tailwind CSS v2.0+ -->
+       <div class="bg-gray-800 px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+  <div class="flex-1 flex justify-between sm:hidden">
+
+    
+
+    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-emerald-300 text-sm font-medium rounded-md text-gray-200 bg-emerald-500 hover:bg-emerald-600"> Previous </a>
+    
+    <a href="#" class="ml-3 relative inline-flex items-center px-4 py-2 border border-emerald-300 text-sm font-medium rounded-md text-gray-200 bg-emerald-500 hover:bg-emerald-600"> Next </a>
+  
+  </div>
+  <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+    <div>
+      
+    </div>
+    <div>
+      <nav class="relative z-0 inline-flex rounded-md shadow-sm sm:items-center -space-x-px" aria-label="Pagination">
+
+
+         
+      
+
+        <div v-for="pagination_link in paginations_links " :key="'pagination_link-' + pagination_link.label" class=" ">
+        <a  @click="pageChange(pagination_link.url)"
+        v-html="pagination_link.label"
+        :class="pagination_link.active  ? 'z-10 bg-emerald-400      cursor-pointer border-emerald-400   relative inline-flex items-center px-4 py-2 border text-sm font-medium': 'bg-gray-750 border-merald-300  '"
+
+        class="bg-gray-900 border-emerald-300 text-gray-200   cursor-pointer hover:bg-emerald-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium hover:bg-emerald-800">
+         
+         </a>
+            
+        </div>
+        <!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
+      <!--  <a href="#" aria-current="page" class="z-10 bg-emerald-900 border-emerald-500 text-gray-200 relative inline-flex items-center px-4 py-2 border text-sm font-medium"> 1 </a>-->
+          
+        
+        
+      </nav>
+    </div>
+  </div>
+       </div>
+
+       
 </template>
 
 <script>
@@ -177,36 +223,58 @@ export default {
       search: [],
       courseList: [],
     };
+    
   },
+   paginations_links:{},
 
   created() {
     this.getCourseList();
   },
   computed: {
     ...mapState(["auth"]),
+
+    page(){
+      return this.$route.query.page ?? 1
+    }
+
   },
 
 
   methods: {
+
+
     getCourseList() {
       this.axios //
         .get(
           "/courses" +
-            "?included=category,user" +
-            "&filter[title]=" +
-            this.search
+          "?included=category,user" + 
+          "&per_page=6&page="+ this.page +
+          "&filter[title]=" +
+          this.search
         )
-        .then((response) => {
+        .then(response => {
+          let res = response.data;
           this.courseList = response.data;
+          this.paginations_links = res.links
         })
         .catch((error) => {
           console.log(error);
         });
     },
+    
 
     async deleteCourse(id) {
       await this.axios.delete("/courses/" + id);
       this.getCourseList();
+    },
+
+    pageChange(url){
+           this.$router.replace({
+              
+             query: {
+               page : url.split('page=')[1]
+             }
+           });
     },
   },
 
@@ -216,6 +284,9 @@ export default {
       this.getCourseList();
     },
     paginate() {},
+    page(){
+       this.getCourseList();
+    }
   },
 };
 </script>

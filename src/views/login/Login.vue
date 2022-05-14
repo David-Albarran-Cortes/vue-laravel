@@ -7,7 +7,7 @@
     <form @submit.prevent="Login()">
       <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
         <div>
-          <label class="text-gray-200 dark:text-gray-200">email   </label>
+          <label class="text-gray-200 dark:text-gray-200">email </label>
           <input
             type="email"
             v-model="email"
@@ -53,7 +53,7 @@
         </div>
       </div>
 
-        <p class="text-white">{{auth}}</p>
+      <p class="text-white">{{ auth }}</p>
 
       <div class="flex justify-end mt-6">
         <button
@@ -75,22 +75,20 @@
         >
           Login
         </button>
-
-        
       </div>
     </form>
   </section>
- 
 </template>
 
 <script>
 import { mapMutations, mapState } from "vuex";
+
 export default {
   data() {
     return {
       email: "",
-      password: "", 
-      errors : [],
+      password: "",
+      errors: [],
     };
   },
   computed: {
@@ -111,15 +109,21 @@ export default {
         .then((response) => {
           console.log(response.data.user);
           this.setAuth(response.data);
-          localStorage.setItem('auth', JSON.stringify(response.data))
-          
+          localStorage.setItem("auth", JSON.stringify(response.data));
+
           this.$router.push({ path: "dashboard" });
+
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your work has been saved",
+            showConfirmButton: false,
+            timer: 1500,
+          });
           
         })
         .catch((error) => {
-          console.log(error.response.data);
-
-           
+          console.log(error.response.data.message);
         });
     },
   },
@@ -127,4 +131,5 @@ export default {
 </script>
 
 <style>
+ 
 </style>

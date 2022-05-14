@@ -8,11 +8,13 @@ import Login from "../views/login/Login.vue";
 import Register from "../views/login/Register.vue";
 import Dashboard from "../views/dashboard/Dashboard.vue";
 
+
+
+
 const router = createRouter({
     history: createWebHistory(
         import.meta.env.BASE_URL),
-    routes: [
-        {
+    routes: [{
             path: "/",
             name: "home",
             component: Blog,

@@ -6,7 +6,11 @@ import { store } from './store'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
+
 import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.js';
+
+
 
 //url_base
 axios.defaults.baseURL = "https://cursos-prueba.tk/api/v2"
