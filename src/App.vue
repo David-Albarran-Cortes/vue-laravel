@@ -189,10 +189,10 @@ import Footer from "@/components/Footer.vue";
                     transition-colors
                     duration-200
                     transform
-                    bg-blue-500
+                    bg-gray-500
                     rounded-md
                     hover:bg-blue-600
-                    md:mx-0 md:w-auto
+                    md:mx-2 md:w-auto
                   "
                   >Register</RouterLink
                 >

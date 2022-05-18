@@ -12,7 +12,8 @@ import 'sweetalert2/dist/sweetalert2.min.js';
 
 
 
-//url_base
+
+
 axios.defaults.baseURL = "https://cursos-prueba.tk/api/v2"
 
 axios.defaults.withCredentials = true;

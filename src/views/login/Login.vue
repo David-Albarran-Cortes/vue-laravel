@@ -76,6 +76,17 @@
           Login
         </button>
       </div>
+
+      <div>
+        
+
+           <p class="flex items-center   text-white    ">
+        
+        <span class="mx-1 text-red-500"> {{ errors }}</span>
+    </p>
+
+
+      </div>
     </form>
   </section>
 </template>
@@ -88,7 +99,7 @@ export default {
     return {
       email: "",
       password: "",
-      errors: [],
+      errors: "",
     };
   },
   computed: {
@@ -120,10 +131,20 @@ export default {
             showConfirmButton: false,
             timer: 1500,
           });
-          
         })
         .catch((error) => {
-          console.log(error.response.data.message);
+          // console.log(error.response.data.message);
+
+          
+
+          let errors = error.response.data.message;
+
+          this.errors =  errors ;
+
+           
+          
+           
+
         });
     },
   },
@@ -131,5 +152,4 @@ export default {
 </script>
 
 <style>
- 
 </style>
