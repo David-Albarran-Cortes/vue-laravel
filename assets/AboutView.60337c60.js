@@ -1,0 +1,1 @@
+import{_ as t,o as a,c as s,a as o,t as _}from"./index.fae53743.js";const n={},r={class:"about"};function c(e,i){return a(),s("div",r,[o("h1",null,"This is an about page "+_(e.$store.state.count),1)])}var l=t(n,[["render",c]]);export{l as default};
